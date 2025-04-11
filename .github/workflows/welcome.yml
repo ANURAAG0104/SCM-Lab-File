@@ -7,13 +7,15 @@ on:
 jobs:
   welcome:
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write  # ← This line is important!
     steps:
-      - name: Greet the contributor
+      - name: Add welcome comment
         uses: peter-evans/create-or-update-comment@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           issue-number: ${{ github.event.pull_request.number }}
           body: |
-            👋 Hello! Thanks for opening your first pull request.  
-            We appreciate your contribution! 🚀  
-            The maintainers will review it soon.
+            👋 Hey there! Thanks for opening your first pull request!  
+            We appreciate your contribution 💙  
+            Stay awesome!
