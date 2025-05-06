@@ -4,18 +4,23 @@ on:
   pull_request_target:
     types: [opened]
 
+permissions:
+  pull-requests: write
+
 jobs:
-  welcome:
+  greeting:
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write  # ← This line is important!
     steps:
-      - name: Add welcome comment
-        uses: peter-evans/create-or-update-comment@v4
+      - name: Greet the contributor
+        uses: actions/github-script@v6
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          issue-number: ${{ github.event.pull_request.number }}
-          body: |
-            👋 Hey there! Thanks for opening your first pull request!  
-            We appreciate your contribution 💙  
-            Stay awesome!
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.payload.pull_request.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: "Thanks for contributing! 🚀 We'll review your pull request soon."
+            })
+
+      - name: Run test after PR opened
+        run: echo "Test completed after PR opened"
