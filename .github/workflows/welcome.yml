@@ -19,7 +19,17 @@ jobs:
               issue_number: context.payload.pull_request.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: "Thanks for contributing! 🚀 We'll review your pull request soon."
+              body: `Thanks for contributing! 🚀 We'll review your pull request soon.
+
+👋 **Hey there!** Thanks a ton for opening your first pull request — that’s a big deal!  
+We truly appreciate the time and effort you've put in 💙  
+
+Your contribution helps make this project better for everyone.  
+If you have any questions, feel free to ask — we’re here to support you! 😊  
+
+Stay awesome, keep contributing, and welcome to the community! 🌟  
+
+✅ *Test completed after PR opened.*`
             })
 
       - name: Run test after PR opened
